@@ -15,13 +15,11 @@ use Endroid\QrCode\Label\Label;
 
 
 
-error_log("Pasa por uí");
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $writer = new PngWriter();
 
-var_dump($_POST);
 
 $qrCode = QrCodeQrCode::create($_POST['field1'])
     ->setEncoding(new Encoding('UTF-8'))

@@ -1,4 +1,5 @@
 <?php
+
 use Endroid\QrCode\QrCode as QrCodeQrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Logo\Logo;
@@ -7,31 +8,69 @@ use Endroid\QrCode\Color\Color;
 require_once __DIR__ . '/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $imageUrl = isset($_POST['imageUrl']) ? $_POST['imageUrl'] : '';
-    $image = isset($_FILES['image']) ? $_FILES['image'] : null;
 
-    echo createQR($imageUrl, $image);
-    var_dump($image);
-    exit();
+    $folderPath = '/tmp';  // Cambia esto al directorio que estás utilizando para los archivos temporales
+
+
+    $imageUrl = isset($_POST['imageUrl']) ? $_POST['imageUrl'] : '';
+
+    // Verificar si se subió el archivo y si es una imagen
+    if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+        $image = $_FILES['image']['tmp_name'];
+
+        // Ruta del directorio temporal del script o proyecto
+        $tmp_dir = __DIR__ . '\tmp';
+
+        error_log($tmp_dir);
+        // Crear directorio temporal
+
+
+
+        try {
+            echo createQR($imageUrl, $image, $tmp_dir);
+        } catch (Exception $e) {
+            error_log("Error al generar el QR: " . $e->getMessage());
+        } finally {
+            // Eliminar directorio temporal
+        }
+
+        exit();
+    } else {
+        error_log("Error: No se subió el archivo correctamente.");
+        // Puedes agregar más detalles del error según sea necesario.
+        exit();
+    }
+
+    if (is_writable($folderPath)) {
+        error_log('La carpeta tiene permisos de escritura.');
+    } else {
+        error_log('La carpeta NO tiene permisos de escritura.');
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tailwind CSS Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .fade-enter-active, .fade-leave-active {
+        .fade-enter-active,
+        .fade-leave-active {
             transition: opacity 0.5s;
         }
-        .fade-enter, .fade-leave-to {
+
+        .fade-enter,
+        .fade-leave-to {
             opacity: 0;
         }
     </style>
 </head>
+
 <body class="flex items-center justify-center h-screen bg-gray-100">
 
     <div id="app" class="bg-white p-8 rounded shadow-md">
@@ -74,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             function fadeIn(element) {
                 var opacity = 0;
-                var interval = setInterval(function () {
+                var interval = setInterval(function() {
                     if (opacity < 1) {
                         opacity += 0.1;
                         element.style.opacity = opacity;
@@ -87,11 +126,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 </body>
+
 </html>
 
 <?php
 
-function createQR($imageUrl, $image)
+function createQR($imageUrl, $image, $tmp_dir)
 {
     $writer = new PngWriter();
 
@@ -99,9 +139,15 @@ function createQR($imageUrl, $image)
         ->setForegroundColor(new Color(45, 35, 125))
         ->setBackgroundColor(new Color(124, 200, 255));
 
-        $logo = Logo::create($image['tmp_name'])->setResizeToWidth(50);
+    $logo = Logo::create($image)->setResizeToWidth(50);
 
-    $result = $writer->write($qrCode);
+    $result = $writer->write($qrCode, $logo);
+
+    // Guardar el QR en el directorio temporal
+    file_put_contents($tmp_dir . '/qr.png', $result->getString());
+
     return $result->getDataUri();
 }
+
+
 ?>
