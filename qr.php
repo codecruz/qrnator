@@ -68,20 +68,20 @@ function createQR($urlTo, $image, $tmp_dir)
     // Obtener el componente azul (b)
     $blueComponent = hexToComponent($_POST['hs-color-input-1'], 'b');
 
-        // Obtener el componente rojo (r)
-        $redComponent1 = hexToComponent($_POST['hs-color-input-2'], 'r');
-        // Obtener el componente verde (g)
-        $greenComponent1 = hexToComponent($_POST['hs-color-input-2'], 'g');
-        // Obtener el componente azul (b)
-        $blueComponent1 = hexToComponent($_POST['hs-color-input-2'], 'b');
+    // Obtener el componente rojo (r)
+    $redComponent1 = hexToComponent($_POST['hs-color-input-2'], 'r');
+    // Obtener el componente verde (g)
+    $greenComponent1 = hexToComponent($_POST['hs-color-input-2'], 'g');
+    // Obtener el componente azul (b)
+    $blueComponent1 = hexToComponent($_POST['hs-color-input-2'], 'b');
 
 
 
     $writer = new PngWriter();
 
     $qrCode = QrCodeQrCode::create($urlTo)
-        ->setForegroundColor(new Color($redComponent,$greenComponent,$blueComponent))
-        ->setBackgroundColor(new Color($redComponent1,$greenComponent1,$blueComponent1));
+        ->setForegroundColor(new Color($redComponent, $greenComponent, $blueComponent))
+        ->setBackgroundColor(new Color($redComponent1, $greenComponent1, $blueComponent1));
 
     $logo = Logo::create($image)->setResizeToWidth(50);
 
