@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind CSS Form</title>
+    <title>QRNator - QR Code Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
 
@@ -18,11 +18,11 @@
     <div id="app" class="bg-white p-8 rounded shadow-md">
         <form id="myForm" enctype="multipart/form-data">
             <div class="mb-4">
-                <label for="urlTo" class="block text-gray-700 text-sm font-bold mb-2">URL de la imagen:</label>
-                <input type="text" id="urlTo" name="urlTo" class="w-full p-2 border rounded">
+                <label for="urlTo" class="block text-gray-700 text-sm font-bold mb-2">Destination URL:</label>
+                <input type="url" id="urlTo" name="urlTo" class="w-full p-2 border rounded">
             </div>
             <div class="mb-4">
-                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Seleccionar imagen:</label>
+                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Upload an image:</label>
                 <input type="file" id="image" name="image" accept="image/*" class="w-full p-2 border rounded">
             </div>
             <div class="mb-4 flex">
