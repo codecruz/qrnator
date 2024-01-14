@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This web app enables you to generate QR codes using a destination URL, an image from the user's device, and the ability to customize the colors of the code and its background.
+Implementing the [endroid/qr-code](https://github.com/endroid/qr-code) library, this web app enables you to generate QR codes using a destination URL, an image from the user's device, and the ability to customize the colors of the code and its background.
+
 
 ## Steps to Generate a QR Code
 
