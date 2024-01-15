@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QRNator - QR Code Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
 
     <script src="./functions.js"></script>
 </head>
@@ -28,14 +27,14 @@
             <div class="mb-4 flex">
                 <div class="w-1/2 flex justify-center items-center">
                     <div>
-                        <label for="hs-color-input-1" class="block text-sm font-medium mb-2 dark:text-white">QR color</label>
-                        <input type="color" class="w-24 p-1 h-10 w-14 block bg-white border border-gray-200 cursor-pointer w-10 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700" id="hs-color-input-1" value="#000000" title="Choose your color">
+                        <label for="hs-color-input-1" class="block text-sm font-medium mb-2">QR color</label>
+                        <input type="color" class="w-24 p-1 h-10 w-14 block bg-white border border-gray-200 cursor-pointer w-10 rounded-lg disabled:opacity-50 disabled:pointer-events-none" id="hs-color-input-1" value="#000000" title="Choose your color">
                     </div>
                 </div>
                 <div class="w-1/2 flex justify-center items-center">
                     <div>
-                        <label for="hs-color-input-2" class="block text-sm font-medium mb-2 dark:text-white">QR background</label>
-                        <input type="color" class="w-24 p-1 h-10 w-14 block bg-white border border-gray-200 cursor-pointer w-10 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700" id="hs-color-input-2" value="#2563eb" title="Choose your color">
+                        <label for="hs-color-input-2" class="block text-sm font-medium mb-2">QR background</label>
+                        <input type="color" class="w-24 p-1 h-10 w-14 block bg-white border border-gray-200 cursor-pointer w-10 rounded-lg disabled:opacity-50 disabled:pointer-events-none " id="hs-color-input-2" value="#2563eb" title="Choose your color">
                     </div>
                 </div>
             </div>
